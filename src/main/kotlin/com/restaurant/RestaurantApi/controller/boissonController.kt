@@ -23,3 +23,4 @@ class BoissonControllor(private val boissonService: BoissonService) {
     fun deleteBoisson(@PathVariable id: Long) = boissonService.deleteBoisson(id)
 
 }
+
