@@ -1,6 +1,6 @@
 package com.restaurant.RestaurantApi.model
 import jakarta.persistence.*
-import jakarta.validation.constraints.Pattern
+
 
 @Entity
 @Table(name="client")

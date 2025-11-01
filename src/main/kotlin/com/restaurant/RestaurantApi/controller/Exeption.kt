@@ -21,7 +21,7 @@ class GlobalExceptionHandler {
 
         ex.bindingResult.fieldErrors.forEach { error ->
             val fieldName = error.field
-            val errorMessage = error.defaultMessage ?: "خطأ غير معروف في التحقق"
+            val errorMessage = error.defaultMessage ?: "Erreur inconnue lors de la vérification"
 
 
             errors[fieldName] = errorMessage

@@ -3,9 +3,6 @@ package com.restaurant.RestaurantApi.model
 
 import jakarta.persistence.*
 
-import jakarta.validation.constraints.NotBlank
-import jakarta.validation.constraints.Pattern
-import jakarta.validation.constraints.Size
 @Entity
 @Table(name = "elements_menu")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
