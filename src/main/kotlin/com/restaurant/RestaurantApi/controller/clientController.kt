@@ -14,9 +14,9 @@ class ClientController(private val clientService: ClientService) {
     @GetMapping
     fun getAllClients(): List<ClientDTO> = clientService.getAllClients()
 
-    @GetMapping("/get-Client")
+    @GetMapping("/{id}")
     //?id=Valeu
-    fun getClientById(@RequestParam id: Long): ClientDTO =
+    fun getClientById(@PathVariable  id: Long): ClientDTO =
         clientService.getClientById(id)
 
     @PostMapping

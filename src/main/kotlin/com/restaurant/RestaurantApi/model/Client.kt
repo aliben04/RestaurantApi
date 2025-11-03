@@ -10,7 +10,7 @@ import jakarta.persistence.*
     @Column(nullable = false)
     var nom: String
 ) {
-      @OneToMany(mappedBy = "client", cascade = [CascadeType.ALL])
+     @OneToMany(mappedBy = "client", cascade = [CascadeType.ALL])
     val commandes: MutableList<Commande> = mutableListOf()
 }
 
