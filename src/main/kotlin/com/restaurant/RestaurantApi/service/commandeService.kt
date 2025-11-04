@@ -38,8 +38,7 @@ class CommandeService(
             elements = existingElements.toMutableList()
         )
 
-        val saved = commandeRepository.save(newCommande)
-        return saved.toResponse()
+        return commandeRepository.save(newCommande).toResponse()
     }
 
     fun updateCommande(id: Long, clientId: Long?, elementIds: List<Long>?): CommandeResponse {
