@@ -2,7 +2,6 @@ package com.restaurant.RestaurantApi.service
 
 import org.springframework.stereotype.Service
 import com.restaurant.RestaurantApi.model.Dessert
-import com.restaurant.RestaurantApi.model.DTO.DessertDto
 import com.restaurant.RestaurantApi.model.DTO.DessertRequist
 import com.restaurant.RestaurantApi.repository.DessertRepository
 

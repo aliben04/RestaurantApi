@@ -5,7 +5,6 @@ import com.restaurant.RestaurantApi.model.Boisson
 import com.restaurant.RestaurantApi.service.BoissonService
 import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.*
-import com.restaurant.RestaurantApi.model.DTO.BoissonDTO
 import com.restaurant.RestaurantApi.model.DTO.BoissonRequest
 @RestController
 @RequestMapping("/api/boissons")

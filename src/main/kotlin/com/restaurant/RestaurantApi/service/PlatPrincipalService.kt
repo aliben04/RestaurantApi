@@ -1,5 +1,4 @@
 package com.restaurant.RestaurantApi.service
-import com.restaurant.RestaurantApi.model.DTO.platprincipalDto
 import com.restaurant.RestaurantApi.model.DTO.platPrincipalRequist
 import com.restaurant.RestaurantApi.model.PlatPrincipal
 import com.restaurant.RestaurantApi.repository.PlatPrincipalRepostory
