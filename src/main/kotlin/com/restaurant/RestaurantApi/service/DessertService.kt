@@ -9,18 +9,18 @@ import com.restaurant.RestaurantApi.repository.DessertRepository
 @Service
 class DessertService(private val dessertRepository: DessertRepository) {
 
-    fun saveDessert(dessert: DessertRequist):DessertDto{
+    fun saveDessert(dessert: DessertRequist):Dessert{
         val dessert= Dessert(nom = dessert.nom, prix = dessert.prix, description = dessert.description, calories = dessert.calories, estServiChaud = dessert.estServiChaud,)
-        return dessertRepository.save(dessert).toDTO()
+        return dessertRepository.save(dessert)
     }
 
 
-    fun getDesserts(): List<DessertDto> = dessertRepository.findAll().map { it.toDTO() }
+    fun getDesserts(): List<Dessert> = dessertRepository.findAll()
 
-    fun getDesserById(id: Long):DessertDto=dessertRepository.findById(id).
-    orElseThrow{NoSuchElementException("Dessert avec id=$id non trouvée")}.toDTO()
+    fun getDesserById(id: Long):Dessert=dessertRepository.findById(id).
+    orElseThrow{NoSuchElementException("Dessert avec id=$id non trouvée")}
 
-    fun updateDessert(id:Long,newdessert: DessertRequist):DessertDto{
+    fun updateDessert(id:Long,newdessert: DessertRequist):Dessert{
         val existing=dessertRepository.findById(id).orElseThrow { RuntimeException("Dessert non trouvé") }
         existing.nom = newdessert.nom
         existing.prix = newdessert.prix
@@ -28,20 +28,12 @@ class DessertService(private val dessertRepository: DessertRepository) {
         existing.calories=newdessert.calories
         existing.estServiChaud=newdessert.estServiChaud
 
-        return  dessertRepository.save(existing).toDTO()
+        return  dessertRepository.save(existing)
 
     }
 
     fun deleteDessert(id:Long) = dessertRepository.deleteById(id)
 
-        private fun Dessert.toDTO(): DessertDto = DessertDto(
-            id = this.id,
-            nom = this.nom,
-            prix = this.prix,
-            description = this.description,
-            calories=this.calories,
-            estServiChaud=this.estServiChaud
-    )
 
 
 }

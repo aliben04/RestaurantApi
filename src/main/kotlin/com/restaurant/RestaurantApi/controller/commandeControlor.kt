@@ -1,8 +1,8 @@
 package com.restaurant.RestaurantApi.controller
 
 
+import com.restaurant.RestaurantApi.model.Commande
 import com.restaurant.RestaurantApi.model.DTO.CommandeRequest
-import com.restaurant.RestaurantApi.model.DTO.CommandeResponse
 import com.restaurant.RestaurantApi.service.CommandeService
 import org.springframework.web.bind.annotation.*
 
@@ -13,16 +13,16 @@ class CommandeController(
 ) {
 
     @GetMapping
-    fun getAllCommandes(): List<CommandeResponse> =
+    fun getAllCommandes(): List<Commande> =
         commandeService.getAllCommandes()
 
 
     @GetMapping("/{id}")
-    fun getCommandeById(@PathVariable id: Long): CommandeResponse =
+    fun getCommandeById(@PathVariable id: Long): Commande =
         commandeService.getCommandeById(id)
 
     @PostMapping
-    fun createCommande(@RequestBody request: CommandeRequest): CommandeResponse =
+    fun createCommande(@RequestBody request: CommandeRequest): Commande =
         commandeService.createCommande(request)
 
 
@@ -30,7 +30,7 @@ class CommandeController(
         @PathVariable id: Long,
         @RequestParam(required = false) clientId: Long?,
         @RequestParam(required = false) elementIds: List<Long>?
-    ): CommandeResponse =
+    ): Commande =
         commandeService.updateCommande(id, clientId, elementIds)
 
     @DeleteMapping("/{id}")

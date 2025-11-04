@@ -2,8 +2,6 @@ package com.restaurant.RestaurantApi.service
 
 import com.restaurant.RestaurantApi.model.Commande
 import com.restaurant.RestaurantApi.model.DTO.CommandeRequest
-import com.restaurant.RestaurantApi.model.DTO.CommandeResponse
-import com.restaurant.RestaurantApi.model.DTO.ElementMenuDTO
 import com.restaurant.RestaurantApi.repository.CommandeRepository
 import com.restaurant.RestaurantApi.repository.ClientRepository
 import com.restaurant.RestaurantApi.repository.ElementMenuRepository
@@ -17,11 +15,11 @@ class CommandeService(
     private val elementMenuRepository: ElementMenuRepository
 ) {
 
-    fun getAllCommandes(): List<CommandeResponse> = commandeRepository.findAll().map { it.toResponse() }
+    fun getAllCommandes(): List<Commande> = commandeRepository.findAll()
 
-    fun getCommandeById(id: Long): CommandeResponse = commandeRepository.findById(id).orElseThrow { RuntimeException("Commande non trouvée") }.toResponse()
+    fun getCommandeById(id: Long): Commande = commandeRepository.findById(id).orElseThrow { RuntimeException("Commande non trouvée") }
 
-    fun createCommande(request: CommandeRequest): CommandeResponse {
+    fun createCommande(request: CommandeRequest): Commande {
         val client = clientRepository.findById(request.clientId).orElseThrow { NoSuchElementException("Client avec ID ${request.clientId} n'a pas été trouvé.") }
 
         val existingElements = elementMenuRepository.findAllById(request.elementIds)
@@ -38,12 +36,11 @@ class CommandeService(
             elements = existingElements.toMutableList()
         )
 
-        return commandeRepository.save(newCommande).toResponse()
+        return commandeRepository.save(newCommande)
     }
 
-    fun updateCommande(id: Long, clientId: Long?, elementIds: List<Long>?): CommandeResponse {
-        val commande = commandeRepository.findById(id)
-            .orElseThrow { RuntimeException("Commande non trouvée") }
+    fun updateCommande(id: Long, clientId: Long?, elementIds: List<Long>?): Commande {
+        val commande = getCommandeById(id)
 
         if (clientId != null) {
             val newClient = clientRepository.findById(clientId)
@@ -59,23 +56,11 @@ class CommandeService(
 
         commande.date = Date()
         val updated = commandeRepository.save(commande)
-        return updated.toResponse()
+        return updated
     }
 
     fun deleteCommande(id: Long) {
         commandeRepository.deleteById(id)
     }
-    private fun Commande.toResponse(): CommandeResponse = CommandeResponse(
-        id = this.id,
-        date = this.date,
-        clientName = this.client.nom,
-        elements = this.elements.map {
-            ElementMenuDTO(
-                id = it.id,
-                nom = it.nom,
-                prix = it.prix,
-                description = it.description
-            )
-        }
-    )
+
 }

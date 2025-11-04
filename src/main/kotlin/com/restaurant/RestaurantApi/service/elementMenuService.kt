@@ -9,32 +9,25 @@ import com.restaurant.RestaurantApi.model.DTO.ElementMenuRequist
 @Service
 class ElementMenuService(private val elementMenuRepository: ElementMenuRepository) {
 
-    fun getAllElements(): List<ElementMenuDTO> = elementMenuRepository.findAll().map { it.toDTO() }
+    fun getAllElements(): List<ElementMenu> = elementMenuRepository.findAll()
 
-    fun getElementById(id: Long): ElementMenuDTO =
-        elementMenuRepository.findById(id).orElseThrow { RuntimeException("Élément non trouvé") }.toDTO()
+    fun getElementById(id: Long): ElementMenu =
+        elementMenuRepository.findById(id).orElseThrow { RuntimeException("Élément non trouvé") }
 
-    fun saveElement(request: ElementMenuRequist): ElementMenuDTO {
+    fun saveElement(request: ElementMenuRequist): ElementMenu {
         val elementMenu = ElementMenu(nom = request.nom, prix = request.prix, description = request.description)
         val saved = elementMenuRepository.save(elementMenu)
-        return saved.toDTO()
+        return saved
     }
 
-    fun updateElement(id: Long, updated: ElementMenuRequist): ElementMenuDTO {
+    fun updateElement(id: Long, updated: ElementMenuRequist): ElementMenu {
         val existing = elementMenuRepository.findById(id).orElseThrow { RuntimeException("Élément non trouvé") }
         existing.nom = updated.nom
         existing.prix = updated.prix
         existing.description = updated.description
-        return elementMenuRepository.save(existing).toDTO()
+        return elementMenuRepository.save(existing)
     }
 
     fun deleteElement(id: Long) = elementMenuRepository.deleteById(id)
-
-    private fun ElementMenu.toDTO(): ElementMenuDTO = ElementMenuDTO(
-        id = this.id,
-        nom = this.nom,
-        prix = this.prix,
-        description = this.description
-    )
 
 }
