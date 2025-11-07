@@ -139,7 +139,11 @@ DELETE /api/commandes/{id}
 
 - Gestion centralisée des exceptions (@ControllerAdvice).
 
-- Utilisation des DTOs pour séparer la couche de présentation.
+- Utilisation des DTOs pour séparer la couche de présentation. 
+- 
+## 📚 Documentation du code (Dokka)
+La documentation générée par **Dokka** se trouve dans le dossier :
+- build/dokka/html/index.html
 
 👥 Auteurs:
 
